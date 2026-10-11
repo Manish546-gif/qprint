@@ -1,0 +1,1030 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+/* ===================================================
+   QWIKPRINT — PWA Mobile App Global Styles
+   Mobile-first, full-screen, installable
+   =================================================== */
+
+:root {
+  --primary: #0052FF;
+  --primary-dark: #003ECC;
+  --primary-soft: #EBF2FF;
+  --primary-border: #C7DDFF;
+
+  --white: #FFFFFF;
+  --bg: #F8FAFC;
+  --card: #FFFFFF;
+
+  --text: #0F172A;
+  --text-2: #334155;
+  --text-3: #64748B;
+  --text-4: #94A3B8;
+
+  --border: #E2E8F0;
+  --border-2: #F1F5F9;
+
+  --success: #10B981;
+  --success-bg: #ECFDF5;
+  --success-border: #A7F3D0;
+
+  --danger: #EF4444;
+  --danger-bg: #FEF2F2;
+  --danger-border: #FECACA;
+
+  --warning: #F59E0B;
+
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 20px;
+  --r-xl: 24px;
+  --r-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 14px -2px rgba(0,0,0,0.08), 0 2px 6px -1px rgba(0,0,0,0.03);
+  --shadow-btn: 0 6px 20px -3px rgba(0,82,255,0.38);
+  --shadow-top: 0 -1px 0 #E2E8F0;
+
+  --font: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Safe area insets for notched phones */
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+
+/* Hard reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  height: 100%;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+button {
+  font-family: var(--font);
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input, select, textarea {
+  font-family: var(--font);
+}
+
+/* ===================================================
+   APP SHELL LAYOUT
+   =================================================== */
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  background: #F4F8FD;
+  position: relative;
+  overflow: hidden;
+
+  /* Centered card-like appearance on tablets/desktop */
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 20px 60px rgba(0,0,0,0.1);
+}
+
+/* Home screen clean top bar matching Figma */
+.topbar-home {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 8px;
+  background: transparent;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.brand-logo-text {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.04em;
+}
+
+.home-help-btn {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: opacity 0.15s;
+}
+
+.home-help-btn:hover {
+  opacity: 0.8;
+}
+
+.home-help-btn:active {
+  opacity: 0.6;
+}
+
+/* Status bar area (iOS notch / dynamic island safe area) */
+.app-status-bar {
+  background: var(--primary);
+  padding-top: var(--sat);
+  flex-shrink: 0;
+}
+
+/* Sticky Top Nav */
+.app-topbar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-2);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  min-height: 56px;
+  position: relative;
+  z-index: 10;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 60px;
+}
+
+.topbar-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 60px;
+  justify-content: flex-end;
+}
+
+.back-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  transition: background 0.15s;
+}
+.back-btn:active { background: var(--border); }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.brand-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 3px 8px -1px rgba(0,82,255,0.4);
+}
+.brand-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.04em;
+}
+.brand-name span { color: var(--primary); }
+
+.help-btn {
+  height: 34px;
+  padding: 0 12px;
+  border-radius: var(--r-full);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s;
+}
+.help-btn.active {
+  background: var(--primary-soft);
+  border-color: var(--primary-border);
+  color: var(--primary);
+}
+
+/* ===================================================
+   STEPPER
+   =================================================== */
+
+.stepper-wrap {
+  padding: 10px 16px 0;
+  background: var(--white);
+  border-bottom: 1px solid var(--border-2);
+  flex-shrink: 0;
+}
+
+.stepper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.stepper-line {
+  position: absolute;
+  top: 13px;
+  left: 14%;
+  right: 14%;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+.stepper-line-fill {
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.4s ease;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 1;
+}
+.step-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-4);
+  transition: all 0.25s;
+}
+.step.done .step-dot {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+.step.active .step-dot {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 0 0 4px rgba(0,82,255,0.15);
+}
+.step-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-4);
+}
+.step.active .step-text { color: var(--primary); font-weight: 700; }
+.step.done .step-text { color: var(--text-2); }
+
+/* ===================================================
+   SCROLLABLE CONTENT AREA
+   =================================================== */
+
+.screen-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+.screen-content {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 100%;
+}
+
+/* Safe area bottom padding on content */
+.screen-content-padded {
+  padding-bottom: calc(100px + var(--sab));
+}
+
+/* ===================================================
+   BOTTOM ACTION BAR (sticky CTA)
+   =================================================== */
+
+.bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border-top: 1px solid var(--border-2);
+  padding: 12px 16px;
+  padding-bottom: calc(12px + var(--sab));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+}
+
+/* ===================================================
+   TYPOGRAPHY
+   =================================================== */
+
+.page-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+.page-sub {
+  font-size: 13.5px;
+  color: var(--text-3);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* ===================================================
+   BUTTONS
+   =================================================== */
+
+.btn-primary {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  border-radius: var(--r-lg);
+  padding: 15px 20px;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: var(--shadow-btn);
+  transition: all 0.15s;
+  letter-spacing: -0.01em;
+}
+.btn-primary:active { transform: scale(0.97); background: var(--primary-dark); }
+.btn-primary:disabled { background: var(--border); color: var(--text-4); box-shadow: none; }
+
+.btn-secondary {
+  width: 100%;
+  background: var(--white);
+  color: var(--text-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 13px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.15s;
+}
+.btn-secondary:active { background: var(--bg); }
+
+.btn-ghost {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 0;
+}
+
+/* ===================================================
+   CARDS & LIST ITEMS
+   =================================================== */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.card.pressable { cursor: pointer; transition: all 0.15s; }
+.card.pressable:active { transform: scale(0.98); background: #FCFDFF; }
+.card.selected { border-color: var(--primary); background: #FCFDFF; box-shadow: 0 0 0 3px rgba(0,82,255,0.08); }
+
+/* ===================================================
+   ICON BOXES
+   =================================================== */
+
+.icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.icon-box.sm { width: 32px; height: 32px; border-radius: 9px; }
+.icon-box.success { background: var(--success-bg); color: var(--success); }
+.icon-box.danger { background: var(--danger-bg); color: var(--danger); }
+.icon-box.round { border-radius: 50%; }
+
+/* ===================================================
+   FORM CONTROLS
+   =================================================== */
+
+.seg-group {
+  background: #E8EDF5;
+  border-radius: var(--r-md);
+  padding: 3px;
+  display: flex;
+  gap: 3px;
+}
+.seg-btn {
+  flex: 1;
+  padding: 9px 8px;
+  border-radius: 13px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-3);
+  text-align: center;
+  transition: all 0.18s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  line-height: 1.3;
+}
+.seg-btn.on {
+  background: var(--white);
+  color: var(--primary);
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.09);
+}
+.seg-sub { font-size: 10px; opacity: 0.75; }
+
+.field-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-input {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-sm);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.text-input:focus { border-color: var(--primary); }
+
+/* Stepper (qty) control */
+.qty-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 8px 12px;
+}
+.qty-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  transition: all 0.15s;
+}
+.qty-btn:active { background: var(--primary-soft); color: var(--primary); }
+.qty-btn:disabled { opacity: 0.35; }
+.qty-val { font-size: 20px; font-weight: 800; color: var(--text); }
+
+/* ===================================================
+   PRICE BANNER
+   =================================================== */
+
+.price-banner {
+  background: var(--primary-soft);
+  border: 1px solid var(--primary-border);
+  border-radius: var(--r-lg);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.price-banner-label { font-size: 13px; font-weight: 700; color: var(--primary); }
+.price-banner-calc { font-size: 11px; color: #3366CC; margin-top: 1px; }
+.price-banner-amount { font-size: 22px; font-weight: 800; color: var(--primary); }
+
+/* ===================================================
+   DIVIDER / SEPARATOR
+   =================================================== */
+
+.divider {
+  height: 1px;
+  background: var(--border-2);
+  margin: 12px 0;
+}
+.divider-dashed { border-top: 1.5px dashed var(--border); margin: 12px 0; }
+
+/* ===================================================
+   RECEIPT ROW
+   =================================================== */
+
+.receipt-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text-3);
+  padding: 4px 0;
+}
+.receipt-row strong { color: var(--text); }
+.receipt-row.total {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+.receipt-total-price { font-size: 22px; font-weight: 800; color: var(--primary); }
+
+/* ===================================================
+   PROGRESS BAR
+   =================================================== */
+
+.progress-track {
+  height: 10px;
+  background: var(--border);
+  border-radius: var(--r-full);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary) 0%, #60A5FA 100%);
+  border-radius: var(--r-full);
+  transition: width 0.25s linear;
+}
+
+/* ===================================================
+   STATUS / BADGE PILLS
+   =================================================== */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--r-full);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+.pill.success { background: var(--success-bg); color: var(--success); border: 1px solid var(--success-border); }
+.pill.primary { background: var(--primary); color: white; }
+.pill.soft { background: var(--primary-soft); color: var(--primary); border: 1px solid var(--primary-border); }
+.pill.warn { background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; }
+
+/* ===================================================
+   FAQ ACCORDION
+   =================================================== */
+
+.faq-item { overflow: hidden; }
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-2);
+}
+.faq-a {
+  font-size: 13px;
+  color: var(--text-3);
+  line-height: 1.6;
+  padding: 10px 0 14px;
+  border-bottom: 1px solid var(--border-2);
+}
+
+/* ===================================================
+   QR CODE BOX
+   =================================================== */
+
+.qr-box {
+  width: 100%;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--shadow-md);
+}
+
+/* ===================================================
+   ANIMATIONS
+   =================================================== */
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.fade-slide-up { animation: fadeSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.pulse { animation: pulseGlow 2s ease-in-out infinite; }
+.spin { animation: spin 0.9s linear infinite; }
+
+/* ===================================================
+   PWA INSTALL BANNER
+   =================================================== */
+
+.install-banner {
+  background: var(--primary);
+  color: white;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.install-banner-text { flex: 1; font-weight: 600; line-height: 1.4; }
+.install-banner-btn {
+  background: white;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 7px 14px;
+  border-radius: var(--r-full);
+  flex-shrink: 0;
+}
+.install-banner-close {
+  color: rgba(255,255,255,0.7);
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+/* ===================================================
+   TABLET — centered phone card
+   =================================================== */
+@media (min-width: 480px) and (max-width: 1023px) {
+  body {
+    background: #0B1120;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .app-shell {
+    height: 90vh;
+    max-height: 860px;
+    border-radius: 36px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+  }
+}
+
+/* ===================================================
+   DESKTOP — full website layout
+   =================================================== */
+@media (min-width: 1024px) {
+  html, body { height: 100%; overflow: hidden; }
+
+  body {
+    background: #F1F5F9;
+    display: block;
+  }
+
+  /* Root fills viewport */
+  #root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Desktop shell: top nav + two-col body ── */
+  .desktop-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Top nav bar */
+  .desktop-topnav {
+    background: white;
+    border-bottom: 1px solid #E2E8F0;
+    padding: 0 32px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    z-index: 20;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .desktop-topnav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .desktop-topnav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .desktop-topnav-link {
+    padding: 7px 16px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: var(--font);
+    transition: all 0.15s;
+  }
+  .desktop-topnav-link:hover { background: #F1F5F9; color: #0F172A; }
+  .desktop-topnav-link.active { background: #EBF2FF; color: #0052FF; }
+
+  /* Two-col body */
+  .desktop-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* Left sidebar */
+  .desktop-sidebar {
+    width: 340px;
+    flex-shrink: 0;
+    background: linear-gradient(160deg, #0036CC 0%, #0052FF 45%, #1A6FFF 100%);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 28px 28px 32px;
+    position: relative;
+  }
+
+  .desktop-sidebar::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 280px; height: 280px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .desktop-sidebar::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -40px;
+    width: 220px; height: 220px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* Right content panel */
+  .desktop-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #F8FAFC;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 24px 48px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* The actual screen card on desktop */
+  .desktop-screen-card {
+    background: #F4F8FD;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+    width: 100%;
+    max-width: 640px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* Desktop-specific screen content overrides */
+  .desktop-screen-card .screen-content {
+    padding: 28px 32px;
+  }
+  .desktop-screen-card .page-title {
+    font-size: 26px;
+  }
+  .desktop-screen-card .btn-primary {
+    padding: 16px 24px;
+    font-size: 15px;
+  }
+  .desktop-screen-card .seg-btn {
+    font-size: 14px;
+    padding: 11px 10px;
+  }
+  .desktop-screen-card .card {
+    padding: 20px;
+  }
+
+  /* Override mobile app-shell on desktop */
+  .app-shell {
+    display: none !important;
+  }
+
+  /* Sidebar step list */
+  .sidebar-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 14px;
+    transition: all 0.2s;
+    cursor: default;
+    margin-bottom: 4px;
+  }
+  .sidebar-step.active {
+    background: rgba(255,255,255,0.15);
+  }
+  .sidebar-step.done {
+    opacity: 0.65;
+  }
+  .sidebar-step-dot {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .sidebar-step.active .sidebar-step-dot {
+    background: white;
+    border-color: white;
+    color: #0052FF;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .sidebar-step.done .sidebar-step-dot {
+    background: rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.5);
+    color: white;
+  }
+  .sidebar-step-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.3;
+  }
+  .sidebar-step.active .sidebar-step-label {
+    color: white;
+    font-weight: 700;
+    font-size: 14.5px;
+  }
+  .sidebar-step.done .sidebar-step-label {
+    color: rgba(255,255,255,0.5);
+  }
+}
+
+@media (min-width: 1280px) {
+  .desktop-sidebar { width: 380px; }
+  .desktop-screen-card { max-width: 700px; }
+  .desktop-content { padding: 40px 32px 56px; }
+}
+
+/* ═══════════════════════════════════════════
+   ECOSYSTEM MODE SWITCHER (Light Glass Pill)
+═══════════════════════════════════════════ */
+.mode-switcher-bar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-top: 1.5px solid #FFFFFF;
+  border-radius: 9999px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 9999;
+  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+}
+
+.mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #64748B;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.mode-btn:hover {
+  color: #0F172A;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.mode-btn.active {
+  background: #0052FF;
+  color: #FFFFFF;
+  box-shadow: 0 3px 12px rgba(0, 82, 255, 0.35);
+}
+
+
+
